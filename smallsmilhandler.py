@@ -27,7 +27,8 @@ class SmallSMILHandler(ContentHandler):
             self.root_layout['width'] = attrs.get('width', "")
             self.root_layout['height'] = attrs.get('height', "")
             self.root_layout['bground_clr'] = attrs.get('background-color', "")
-            self.list.append("Etiqueta : " + name + "\n")
+            self.list.append("Etiqueta : " + name)
+            self.list.append("\n")
             self.list.append("Atributos : " + str(self.root_layout))
         elif name == 'region':
             self.region['id'] = attrs.get('ud', "")
