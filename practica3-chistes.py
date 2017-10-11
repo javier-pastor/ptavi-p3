@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from xml.sax import make_parser
-from xml.sax.handler import ContentHandler
+from xml.sax import make_parser # metodo
+from xml.sax.handler import ContentHandler # clase
 
 class ChistesHandler(ContentHandler):
     """
@@ -27,7 +27,6 @@ class ChistesHandler(ContentHandler):
             # De esta manera tomamos los valores de los atributos
             self.calificacion = attrs.get('calificacion', "")
         elif name == 'pregunta':
-            print("hola")
             self.inPregunta = True
         elif name == 'respuesta':
             self.inRespuesta = True
@@ -37,9 +36,12 @@ class ChistesHandler(ContentHandler):
         Método que se llama al cerrar una etiqueta
         """
         if name == 'pregunta':
+            print(self.pregunta)
             self.pregunta = ""
             self.inPregunta = False
         if name == 'respuesta':
+            print(self.respuesta)
+            print(self.calificacion)
             self.respuesta = ""
             self.inRespuesta = False
 
