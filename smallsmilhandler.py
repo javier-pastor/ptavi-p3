@@ -7,7 +7,7 @@ from xml.sax.handler import ContentHandler
 
 class SmallSMILHandler(ContentHandler):
     """
-        Clase que usamos como pequeno manejador Smil
+        Esta clase es un manejador Smil
     """
 
     def __init__(self):
