@@ -9,7 +9,7 @@ import sys
 import json
 
 
-class KaraokeClass(SmallSMILHandler):
+class KaraokeLocal(SmallSMILHandler):
     """
         Esta clase se utiliza para orientar a objetos el programa karaoke.py
     """
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     except IndexError:
         print ('Usage: python3 karaoke.py file.smil')
         raise SystemExit
-    Karaoke = KaraokeClass()
+    Karaoke = KaraokeLocal()
     Karaoke.constructor(smil_file)
     Karaoke.print_list()
     Karaoke.save_json()
