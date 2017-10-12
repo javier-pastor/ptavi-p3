@@ -29,7 +29,7 @@ class KaraokeLocal(SmallSMILHandler):
             print ('File not found')
             raise SystemExit
 
-    def print_list(self):
+    def __str__(self):
         """
             Imprimo etiquetas y archivos
         """
@@ -39,8 +39,8 @@ class KaraokeLocal(SmallSMILHandler):
                 print (attr + '="' + (elem[1][attr])+ '"' + "\t", end = "")
         print("\n")
 
-    def save_json(self):
-        with open('karaoke.json', 'w') as file:
+    def do_json(self, smil_name, json_name):
+        with open(json_name, 'w') as file:
             json.dump(self.list, file)
 
     def do_local(self):
@@ -66,6 +66,11 @@ if __name__ == '__main__':
         raise SystemExit
     Karaoke = KaraokeLocal()
     Karaoke.constructor(smil_file)
-    Karaoke.print_list()
-    Karaoke.save_json()
+    Karaoke.__str__()
+    try:
+        Karaoke.do_json(smil_file)
+    except TypeError:
+        Karaoke.do_json(smil_file,smil_file[:-5]+".json")
     Karaoke.do_local()
+    Karaoke.do_json(smil_file,"local.json")
+    Karaoke.__str__()
