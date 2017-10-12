@@ -8,6 +8,7 @@ from urllib.request import urlretrieve
 import os
 import sys
 import json
+import fileinput
 
 
 class KaraokeLocal(SmallSMILHandler):
@@ -51,6 +52,9 @@ class KaraokeLocal(SmallSMILHandler):
                     source = elem[1][attr]
                     urlretrieve(source, elem[1][attr][(elem[1][attr].rfind('/'))+1:])
                     elem[1][attr] = elem[1][attr][(elem[1][attr].rfind('/'))+1:]
+                    with fileinput.FileInput("karaoke.smil", inplace=True, backup='.bak') as file:
+                        for line in file:
+                            print(line.replace(source, elem[1][attr]), end='')
 
 
 if __name__ == '__main__':
