@@ -24,7 +24,7 @@ class KaraokeLocal(SmallSMILHandler):
         parser.setContentHandler(self)
         try:
             parser.parse(open(smil_file))
-            self.list = get_tags()
+            self.list = self.get_tags()
         except IOError:
             print ('File not found')
             raise SystemExit
