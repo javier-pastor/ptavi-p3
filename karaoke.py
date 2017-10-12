@@ -4,6 +4,7 @@
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 from smallsmilhandler import SmallSMILHandler
+from urllib.request import urlretrieve
 import os
 import sys
 import json
@@ -40,6 +41,17 @@ class KaraokeLocal(SmallSMILHandler):
         with open('karaoke.json', 'w') as file:
             json.dump(self.list, file)
 
+    def do_local(self):
+        """
+            Descarga archivos remotos y los hace locales
+        """
+        for elem in self.list:
+            for attr in elem[1]:
+                if attr == 'src' and elem[1][attr][:7] == 'http://':
+                    source = elem[1][attr]
+                    urlretrieve(source, elem[1][attr][(elem[1][attr].rfind('/'))+1:])
+                    elem[1][attr] = elem[1][attr][(elem[1][attr].rfind('/'))+1:]
+
 
 if __name__ == '__main__':
     try:
@@ -51,3 +63,4 @@ if __name__ == '__main__':
     Karaoke.constructor(smil_file)
     Karaoke.print_list()
     Karaoke.save_json()
+    Karaoke.do_local()
